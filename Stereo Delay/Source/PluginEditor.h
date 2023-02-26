@@ -14,7 +14,11 @@
 //==============================================================================
 /**
 */
-class StereoDelayAudioProcessorEditor  : public juce::AudioProcessorEditor
+class StereoDelayAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                            public juce::ComboBox::Listener,
+                                            public juce::Button::Listener,
+                                            public juce::Slider::Listener
+                                            
 {
 public:
     StereoDelayAudioProcessorEditor (StereoDelayAudioProcessor&);
@@ -23,11 +27,20 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    
+    void comboBoxChanged(juce::ComboBox * comboBox) override;
+    void buttonClicked(juce::Button * button) override;
+    void sliderValueChanged(juce::Slider * slider) override;
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     StereoDelayAudioProcessor& audioProcessor;
+    
+    juce::ComboBox polySelector;
+    juce::ToggleButton bypass;
+    juce::Slider delay;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessorEditor)
 };
