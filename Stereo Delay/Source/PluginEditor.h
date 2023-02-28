@@ -37,9 +37,10 @@ private:
     // access the processor object that created it.
     StereoDelayAudioProcessor& audioProcessor;
     
-    juce::ComboBox polySelector;
+    juce::ComboBox leftSelector;
+    juce::ComboBox rightSelector;
     juce::ToggleButton bypass;
-    juce::Slider delay;
+    juce::Slider delayKnob;
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessorEditor)
