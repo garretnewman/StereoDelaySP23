@@ -42,6 +42,9 @@ private:
     juce::ToggleButton bypass;
     juce::Slider delayKnob;
     
+    juce::LookAndFeel_V2 lookAndFeel2;
+    juce::Slider gainKnobL;
+    juce::Slider gainKnobR;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessorEditor)
 };

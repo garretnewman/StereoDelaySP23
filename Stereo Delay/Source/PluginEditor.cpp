@@ -18,15 +18,53 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     // editor's size to whatever you need it to be.
     setSize (800, 350);
     
+    //delayKnob.setLookAndFeel(&lookAndFeel2);
     delayKnob.addListener(this);
     delayKnob.setBounds(350, 90, 100, 80);
     delayKnob.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     addAndMakeVisible(delayKnob);
     
+    bypass.addListener(this);
+    bypass.setBounds(387, 20, 75, 75);
+    bypass.setButtonText("Bypass");
+    addAndMakeVisible(bypass);
+    
     leftSelector.addListener(this);
     leftSelector.setBounds(35, 35, 75, 50);
+    leftSelector.addItem("Whole",1);
+    leftSelector.addItem("Half",2);
+    leftSelector.addItem("Dotted Half",3);
+    leftSelector.addItem("Quater",4);
+    leftSelector.addItem("Dotted Quarter",5);
+    leftSelector.addItem("Triplet",6);
+    leftSelector.setText("Select Delay...");
     addAndMakeVisible(leftSelector);
+    
+    rightSelector.addListener(this);
+    rightSelector.setBounds(690, 35, 75, 50);
+    rightSelector.addItem("Whole",1);
+    rightSelector.addItem("Half",2);
+    rightSelector.addItem("Dotted Half",3);
+    rightSelector.addItem("Quater",4);
+    rightSelector.addItem("Dotted Quarter",5);
+    rightSelector.addItem("Triplet",6);
+    rightSelector.setText("Select Delay...");
+    addAndMakeVisible(rightSelector);
+    
+    gainKnobL.addListener(this);
+    gainKnobL.setBounds(105, 150, 75, 75);
+    gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
+    gainKnobL.setLookAndFeel(&lookAndFeel2);
+    addAndMakeVisible(gainKnobL);
+    
+    gainKnobR.addListener(this);
+    gainKnobR.setBounds(615, 150, 75, 75);
+    gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
+    gainKnobR.setLookAndFeel(&lookAndFeel2);
+    addAndMakeVisible(gainKnobR);
 }
 
 StereoDelayAudioProcessorEditor::~StereoDelayAudioProcessorEditor()
@@ -59,14 +97,29 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
+    g.drawFittedText("Gain", 105, 175, 75, 75, juce::Justification::centredBottom, 1);
+    
+    g.setColour (juce::Colours::darkgrey);
+    g.setFont (20.0f);
     g.drawFittedText("Right Channel", 550, 35, 225, 300, juce::Justification::centredBottom, 1);
     
+    g.setColour (juce::Colours::darkgrey);
+    g.setFont (20.0f);
+    g.drawFittedText("Gain", 615, 175, 75, 75, juce::Justification::centredBottom, 1);
+    
     g.setColour (juce::Colours::ghostwhite);
-    g.setFont (28.0f);
+    g.setFont (28.f);
     g.drawFittedText ("Polyrhythmic Stereo Delay", getLocalBounds(), juce::Justification::centredTop, 1);
     
     g.setColour (juce::Colours::lightgrey);
     g.fillRoundedRectangle(300, 75, 200, 275, 10);
+    
+    g.setColour (juce::Colours::grey);
+    g.fillRoundedRectangle(350, 85, 100, 100, 10);
+    
+    g.setColour (juce::Colours::darkgrey);
+    g.setFont (20.0f);
+    g.drawFittedText("Delay Time", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
     
     
 }
