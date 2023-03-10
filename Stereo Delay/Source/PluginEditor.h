@@ -43,6 +43,7 @@ private:
     juce::Slider delayKnob;
     
     juce::LookAndFeel_V2 lookAndFeel2;
+    juce::LookAndFeel_V4 otherLookAndFeel;
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
 

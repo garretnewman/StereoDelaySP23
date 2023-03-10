@@ -18,7 +18,9 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     // editor's size to whatever you need it to be.
     setSize (800, 350);
     
-    //delayKnob.setLookAndFeel(&lookAndFeel2);
+    otherLookAndFeel.setColour(juce::Slider::thumbColourId, juce::Colours::darkred);
+    juce::LookAndFeel::setDefaultLookAndFeel(&otherLookAndFeel);
+    
     delayKnob.addListener(this);
     delayKnob.setBounds(350, 90, 100, 80);
     delayKnob.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -26,7 +28,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     addAndMakeVisible(delayKnob);
     
     bypass.addListener(this);
-    bypass.setBounds(387, 20, 75, 75);
+    bypass.setBounds(370, 20, 75, 75);
     bypass.setButtonText("Bypass");
     addAndMakeVisible(bypass);
     
@@ -95,7 +97,7 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (20.0f);
     g.drawFittedText("Left Channel", 35, 35, 225, 300, juce::Justification::centredBottom, 1);
     
-    g.setColour (juce::Colours::darkgrey);
+    g.setColour (juce::Colours::black);
     g.setFont (20.0f);
     g.drawFittedText("Gain", 105, 175, 75, 75, juce::Justification::centredBottom, 1);
     
@@ -103,7 +105,7 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (20.0f);
     g.drawFittedText("Right Channel", 550, 35, 225, 300, juce::Justification::centredBottom, 1);
     
-    g.setColour (juce::Colours::darkgrey);
+    g.setColour (juce::Colours::black);
     g.setFont (20.0f);
     g.drawFittedText("Gain", 615, 175, 75, 75, juce::Justification::centredBottom, 1);
     
@@ -120,6 +122,12 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
     g.drawFittedText("Delay Time", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
+    
+    g.setColour (juce::Colours::darkgrey);
+    g.fillRoundedRectangle(105, 150, 75, 75, 5);
+
+    g.setColour (juce::Colours::darkgrey);
+    g.fillRoundedRectangle(615, 150, 75, 75, 5);
     
     
 }
@@ -144,3 +152,4 @@ void StereoDelayAudioProcessorEditor::sliderValueChanged(juce::Slider * slider)
 {
     // Implement functionality later
 }
+

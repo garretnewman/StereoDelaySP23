@@ -39,6 +39,7 @@
 		57C2D452BF82A0061F0D0691 /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = 593F3F8A4F548BAEAFED881E; };
 		5BCB38A398EB874EC92D1DDB /* include_juce_audio_plugin_client_utils.cpp */ = {isa = PBXBuildFile; fileRef = C9FFD7147EC9734231DA50C8; };
 		6D9AB1E5FFF27C6A6531CA0C /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 90779BF0E4C545CE5B081215; };
+		72A15450EE58E083FF126BB0 /* Knob1.cpp */ = {isa = PBXBuildFile; fileRef = F8FC4F450D47AA708C8231AC; };
 		7E72908F71E923DFB703F73C /* AudioUnit.framework */ = {isa = PBXBuildFile; fileRef = 5E369D3A5A232A9639E83622; };
 		81A69109ADC9FC3ED41804AA /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXBuildFile; fileRef = 13F8717C46C6CD906AB9A930; };
 		82D724566938D2397C8C7818 /* include_juce_events.mm */ = {isa = PBXBuildFile; fileRef = C4E0364B0D443C23A4F06883; };
@@ -87,6 +88,7 @@
 		647767252BE7C25EE5624E0F /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
 		700B664EF7633B4B1E4888EB /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stereo Delay.vst3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70821C84E557F00D542C9E2F /* PluginEditor.cpp */ /* PluginEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginEditor.cpp; path = ../../Source/PluginEditor.cpp; sourceTree = SOURCE_ROOT; };
+		7A675E1BA87311CFB2A36A7A /* Knob1.h */ /* Knob1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Knob1.h; path = ../../Source/Knob1.h; sourceTree = SOURCE_ROOT; };
 		7D490986C7FB83535C5E843F /* include_juce_audio_plugin_client_ARA.cpp */ /* include_juce_audio_plugin_client_ARA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_ARA.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_ARA.cpp; sourceTree = SOURCE_ROOT; };
 		7E8C6BE1F7FF67FC4E878360 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		7F5694334076285D405AB7EC /* include_juce_audio_plugin_client_VST_utils.mm */ /* include_juce_audio_plugin_client_VST_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_VST_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm; sourceTree = SOURCE_ROOT; };
@@ -123,6 +125,7 @@
 		E2C36A8D419D4652C949C781 /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		E79728DE194057E380CA5439 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = /Applications/JUCE/modules/juce_audio_devices; sourceTree = "<absolute>"; };
 		F0F5156ADA08C26A031CE4A4 /* PluginEditor.h */ /* PluginEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = SOURCE_ROOT; };
+		F8FC4F450D47AA708C8231AC /* Knob1.cpp */ /* Knob1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Knob1.cpp; path = ../../Source/Knob1.cpp; sourceTree = SOURCE_ROOT; };
 		FD91C4553F3AFA5906F1B9A6 /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -238,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				7362C16CFCB5D61630D2438D,
+				8E3A2CAA83812DD282EE3ADC,
 			);
 			name = "Stereo Delay";
 			sourceTree = "<group>";
@@ -291,6 +295,15 @@
 				5E22A7E135B842F833CBB641,
 			);
 			name = "JUCE Library Code";
+			sourceTree = "<group>";
+		};
+		8E3A2CAA83812DD282EE3ADC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F8FC4F450D47AA708C8231AC,
+				7A675E1BA87311CFB2A36A7A,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		BBADE2C6A7E3DE2A85934BA6 /* Source */ = {
@@ -553,6 +566,7 @@
 			files = (
 				96C3C7F60C53E29EABFDA594,
 				0135803ED2E0BF4E3DE617F6,
+				72A15450EE58E083FF126BB0,
 				CAE60FEF3F73278BCBCF57E8,
 				FEAEBAC4027EB557A0A3F585,
 				07CE320977F603BBE0C029B2,
