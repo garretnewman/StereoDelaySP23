@@ -58,15 +58,16 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     gainKnobL.setBounds(105, 150, 75, 75);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
-    gainKnobL.setLookAndFeel(&lookAndFeel2);
+    gainKnobL.setLookAndFeel(&otherLookAndFeel);
     addAndMakeVisible(gainKnobL);
     
     gainKnobR.addListener(this);
     gainKnobR.setBounds(615, 150, 75, 75);
     gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
-    gainKnobR.setLookAndFeel(&lookAndFeel2);
+    gainKnobR.setLookAndFeel(&otherLookAndFeel);
     addAndMakeVisible(gainKnobR);
+    
 }
 
 StereoDelayAudioProcessorEditor::~StereoDelayAudioProcessorEditor()
@@ -84,13 +85,13 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setColour (juce::Colours::darkgrey);
     g.fillRect(25, 25, 225, 300);
     
-    g.setColour (juce::Colours::grey);
+    g.setColour (juce::Colours::floralwhite);
     g.fillRect(30, 30, 230, 305);
     
     g.setColour(juce::Colours::darkgrey);
     g.fillRect(550, 25, 225, 300);
     
-    g.setColour (juce::Colours::grey);
+    g.setColour (juce::Colours::floralwhite);
     g.fillRect(540, 30, 230, 305);
     
     g.setColour (juce::Colours::darkgrey);

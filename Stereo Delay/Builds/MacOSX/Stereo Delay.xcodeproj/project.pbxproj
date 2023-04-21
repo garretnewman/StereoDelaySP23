@@ -62,6 +62,7 @@
 		D1684AD66AB839C3840534E1 /* AudioToolbox.framework */ = {isa = PBXBuildFile; fileRef = 55B624BF18A24D7A0C2B59CC; };
 		E66D59781A4F37B40B8BBDE2 /* CoreAudio.framework */ = {isa = PBXBuildFile; fileRef = 850BF291248BA553ABB4F6B3; };
 		EFBB4D89442D7709CF7575E5 /* include_juce_data_structures.mm */ = {isa = PBXBuildFile; fileRef = 874A7DBF50B2D809A3565328; };
+		F29D1C2CE5480373F69A3F48 /* DelayEffect.cpp */ = {isa = PBXBuildFile; fileRef = 2FE8A9331F351EF47FAB8539; };
 		F899DCB31572E4BD5DB357B1 /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = A77D16557FF016BE4E4EC403; };
 		FEAEBAC4027EB557A0A3F585 /* include_juce_audio_devices.mm */ = {isa = PBXBuildFile; fileRef = 647767252BE7C25EE5624E0F; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		16B84A53D4EDEC03B328B880 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stereo Delay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D544DC5DDDD7072057673A2 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2D792AA9C0C58CD38842711F /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2FE8A9331F351EF47FAB8539 /* DelayEffect.cpp */ /* DelayEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DelayEffect.cpp; path = ../../Source/DelayEffect.cpp; sourceTree = SOURCE_ROOT; };
 		301E1AA501AF7AEDEE888E4C /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = /Applications/JUCE/modules/juce_gui_basics; sourceTree = "<absolute>"; };
 		322A33994C34F182322AE35B /* juce_audio_utils */ /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_utils; path = /Applications/JUCE/modules/juce_audio_utils; sourceTree = "<absolute>"; };
 		365AE4F7ACE964E0457AF4C0 /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libStereo Delay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		453F0CD876B66B33441CBC07 /* include_juce_audio_formats.mm */ /* include_juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_formats.mm; path = ../../JuceLibraryCode/include_juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
 		4F4F31181D40E959D6BABF8A /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		55B624BF18A24D7A0C2B59CC /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		56E3AE7A4A9DA9CA8639C97E /* DelayEffect.h */ /* DelayEffect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DelayEffect.h; path = ../../Source/DelayEffect.h; sourceTree = SOURCE_ROOT; };
 		593F3F8A4F548BAEAFED881E /* DiscRecording.framework */ /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		5CD427B8A594AD0BB5EA8E45 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Applications/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
 		5DA500365E09B11EAA87AFD5 /* Cocoa.framework */ /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -249,6 +252,8 @@
 		7362C16CFCB5D61630D2438D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2FE8A9331F351EF47FAB8539,
+				56E3AE7A4A9DA9CA8639C97E,
 				CF835AB9A107947730C5760C,
 				3A16CCAEB510E874640C4943,
 				70821C84E557F00D542C9E2F,
@@ -564,6 +569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F29D1C2CE5480373F69A3F48,
 				96C3C7F60C53E29EABFDA594,
 				0135803ED2E0BF4E3DE617F6,
 				72A15450EE58E083FF126BB0,

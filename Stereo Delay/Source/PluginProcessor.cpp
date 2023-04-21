@@ -95,6 +95,7 @@ void StereoDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    delay.prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void StereoDelayAudioProcessor::releaseResources()
@@ -144,6 +145,13 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    float wet = 0.6f;
+    delay.setWet (wet);
+    delay.setDelayMS(400.f);
+    
+    int numSamples = buffer.getNumSamples();
+    
+    
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
@@ -154,6 +162,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     {
         auto* channelData = buffer.getWritePointer (channel);
 
+        delay.processInPlace(channelData, numSamples, channel);
         // ..do something to the data...
     }
 }

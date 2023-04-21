@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "DelayEffect.h"
 
 //==============================================================================
 /**
@@ -57,6 +58,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    
+    EchoEffect delay;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessor)
 };

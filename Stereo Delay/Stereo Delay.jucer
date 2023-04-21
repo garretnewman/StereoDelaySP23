@@ -4,6 +4,8 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="eRwH5d" name="Stereo Delay">
     <GROUP id="{4843DC79-65E9-4D70-692C-26FA8B907070}" name="Source">
+      <FILE id="nopL4Z" name="DelayEffect.cpp" compile="1" resource="0" file="Source/DelayEffect.cpp"/>
+      <FILE id="ciE1n5" name="DelayEffect.h" compile="0" resource="0" file="Source/DelayEffect.h"/>
       <FILE id="GywC6P" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="cjFQ22" name="PluginProcessor.h" compile="0" resource="0"

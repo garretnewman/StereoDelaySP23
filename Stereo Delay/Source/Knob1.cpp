@@ -21,6 +21,12 @@ void Knob1::drawRotarySlider (juce::Graphics& g, int x, int y, int width, int he
             auto rw = radius * 2.0f;
             auto angle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
     
+    juce::Path p;
+            auto pointerLength = radius * 0.33f;
+            auto pointerThickness = 2.0f;
+            p.addRectangle (-pointerThickness * 0.5f, -radius, pointerThickness, pointerLength);
+            p.applyTransform (juce::AffineTransform::rotation (angle).translated (centreX, centreY));
+    
     // fill
            g.setColour (juce::Colours::orange);
            g.fillEllipse (rx, ry, rw, rw);
@@ -28,4 +34,8 @@ void Knob1::drawRotarySlider (juce::Graphics& g, int x, int y, int width, int he
     // outline
            g.setColour (juce::Colours::red);
            g.drawEllipse (rx, ry, rw, rw, 1.0f);
+    
+    // pointer
+            g.setColour (juce::Colours::yellow);
+            g.fillPath (p);
 };
