@@ -145,9 +145,11 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    
     float wet = 0.6f;
     delay.setWet (wet);
-    delay.setDelayMS(400.f);
+    delay.setDelayMS(delayValue);
+    gain.setGain(gainValueL);
     
     int numSamples = buffer.getNumSamples();
     
@@ -161,9 +163,11 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
-
+        
         delay.processInPlace(channelData, numSamples, channel);
         // ..do something to the data...
+        
+        
     }
 }
 

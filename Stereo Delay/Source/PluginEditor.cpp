@@ -23,6 +23,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     delayKnob.addListener(this);
     delayKnob.setBounds(350, 90, 100, 80);
+    delayKnob.setRange(50.0, 1000.0, 1.0);
     delayKnob.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     addAndMakeVisible(delayKnob);
@@ -56,6 +57,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     gainKnobL.addListener(this);
     gainKnobL.setBounds(105, 150, 75, 75);
+    gainKnobL.setRange(-12.0, 0.0, 0.0);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobL.setLookAndFeel(&otherLookAndFeel);
@@ -63,6 +65,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     gainKnobR.addListener(this);
     gainKnobR.setBounds(615, 150, 75, 75);
+    gainKnobR.setRange(-12.0, 0.0, 0.0);
     gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobR.setLookAndFeel(&otherLookAndFeel);
@@ -151,6 +154,22 @@ void StereoDelayAudioProcessorEditor::buttonClicked(juce::Button * button)
 
 void StereoDelayAudioProcessorEditor::sliderValueChanged(juce::Slider * slider)
 {
-    // Implement functionality later
+    // This is how we check which slider was moved
+        if (slider == &gainKnobL)
+        {
+            auto valueL = slider->getValue();
+            audioProcessor.gainValueL = valueL;
+            //DBG(valueL)
+        }
+        if (slider == &gainKnobR)
+        {
+            auto valueR = slider->getValue();
+            audioProcessor.gainValueR = valueR;
+            //DBG(valueR);
+        }
+    if(slider == &delayKnob)
+    {
+        auto valueD = slider->getValue();
+        audioProcessor.delayValue = valueD;
+    }
 }
-

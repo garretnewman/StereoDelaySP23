@@ -12,8 +12,6 @@
 
 float DelayEffect::processSample(float x, const int c){
     
-    // one sample of delay
-    //int currentIndex = i[c];
     float y = delayBuffer[r[c]][c];
     
     delayBuffer[w[c]][c] = x;
