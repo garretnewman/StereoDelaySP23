@@ -8,6 +8,9 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include"JuceHeader.h"
+
+
 
 //==============================================================================
 StereoDelayAudioProcessor::StereoDelayAudioProcessor()
@@ -95,7 +98,8 @@ void StereoDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    delay.prepareToPlay(sampleRate, samplesPerBlock);
+    delayL.prepareToPlay(sampleRate, samplesPerBlock);
+    //delayR.prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void StereoDelayAudioProcessor::releaseResources()
@@ -147,10 +151,19 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
 
     
     float wet = 0.6f;
-    delay.setWet (wet);
-    delay.setDelayMS(delayValue);
+    delayL.setWet (wet);
+    //delayL.setDelayMS(delayValue);
     gain.setGain(gainValueL);
+    delayR.setWet(wet);
     
+    if (delayLeft == 1)
+    {
+        delayL.setDelayMS(delayValue * 4);
+    }
+    else if(delayLeft == 2)
+    {
+        delayL.setDelayMS(delayValue * 2);
+    }
     int numSamples = buffer.getNumSamples();
     
     
@@ -163,11 +176,17 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
-        
-        delay.processInPlace(channelData, numSamples, channel);
+        if(channel == 0)
+        {
+            delayL.processInPlace(channelData, numSamples, channel);
+        }
         // ..do something to the data...
-        
-        
+        if(channel == 1)
+        {
+            delayR.processInPlace(channelData, numSamples, channel);
+        }
+      
+
     }
 }
 
@@ -202,3 +221,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new StereoDelayAudioProcessor();
 }
+

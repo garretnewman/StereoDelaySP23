@@ -23,7 +23,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     delayKnob.addListener(this);
     delayKnob.setBounds(350, 90, 100, 80);
-    delayKnob.setRange(50.0, 1000.0, 1.0);
+    delayKnob.setRange(50.0, 300, 1.0);
     delayKnob.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     addAndMakeVisible(delayKnob);
@@ -35,12 +35,11 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     leftSelector.addListener(this);
     leftSelector.setBounds(35, 35, 75, 50);
-    leftSelector.addItem("Whole",1);
-    leftSelector.addItem("Half",2);
-    leftSelector.addItem("Dotted Half",3);
-    leftSelector.addItem("Quater",4);
-    leftSelector.addItem("Dotted Quarter",5);
-    leftSelector.addItem("Triplet",6);
+    leftSelector.addItem("Half",1);
+    leftSelector.addItem("Dotted Half",2);
+    leftSelector.addItem("Quater",3);
+    leftSelector.addItem("Dotted Quarter",4);
+    leftSelector.addItem("Triplet",5);
     leftSelector.setText("Select Delay...");
     addAndMakeVisible(leftSelector);
     
@@ -125,7 +124,7 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
-    g.drawFittedText("Delay Time", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
+    g.drawFittedText("Tempo", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
     
     g.setColour (juce::Colours::darkgrey);
     g.fillRoundedRectangle(105, 150, 75, 75, 5);
@@ -144,8 +143,20 @@ void StereoDelayAudioProcessorEditor::resized()
 
 void StereoDelayAudioProcessorEditor::comboBoxChanged(juce::ComboBox * comboBox)
 {
-    // Implement functionality later
+    if(comboBox == &leftSelector)
+    {
+        auto leftDelay = comboBox->getSelectedId();
+        audioProcessor.delayLeft = leftDelay;
+        //DBG(leftDelay);
+    }
+    
+    if (comboBox == &rightSelector)
+    {
+        auto rightDelay = comboBox ->getSelectedId();
+        audioProcessor.delayRight = rightDelay;
+    }
 }
+
 
 void StereoDelayAudioProcessorEditor::buttonClicked(juce::Button * button)
 {
@@ -173,3 +184,4 @@ void StereoDelayAudioProcessorEditor::sliderValueChanged(juce::Slider * slider)
         audioProcessor.delayValue = valueD;
     }
 }
+

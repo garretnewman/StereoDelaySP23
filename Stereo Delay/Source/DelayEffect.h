@@ -29,13 +29,15 @@ public:
 private:
     
     // One sample of delay
-    static const int SIZE = 48000;
+    static const int SIZE = 96000;
     float delayBuffer[SIZE][2] = {0.f}; // left and right channels
     int w[2] = {SIZE-1}; // write index for buffer (input), initialize to end of buffer
     int r[2] = {0}; // read index for buffer (output)
     
     int delaySamples = 10000;
     float Fs = 48000.f;
+    float fbd = 0.f;
+    float fbdValue = 0.6f;
 };
 
 
@@ -64,7 +66,11 @@ private:
     
     float wet = 0.5f;
     
+    
+    
 };
+
+
 
 
 
