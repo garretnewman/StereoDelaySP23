@@ -35,28 +35,34 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     leftSelector.addListener(this);
     leftSelector.setBounds(35, 35, 75, 50);
-    leftSelector.addItem("Half",1);
-    leftSelector.addItem("Dotted Half",2);
-    leftSelector.addItem("Quater",3);
-    leftSelector.addItem("Dotted Quarter",4);
-    leftSelector.addItem("Triplet",5);
-    leftSelector.setText("Select Delay...");
+    leftSelector.addItem("Sixteenth",1);
+    leftSelector.addItem("Eighth",2);
+    leftSelector.addItem("Dotted Eighth",3);
+    leftSelector.addItem("Quater",4);
+    leftSelector.addItem("Dotted Quarter",6);
+    leftSelector.addItem("Fifth",5);
+    leftSelector.addItem("Seventh",7);
+    leftSelector.addItem("Ninth",9);
+    leftSelector.setEditableText(isEditable);
+    leftSelector.setText("Select Subdivision...");
     addAndMakeVisible(leftSelector);
     
     rightSelector.addListener(this);
     rightSelector.setBounds(690, 35, 75, 50);
-    rightSelector.addItem("Whole",1);
-    rightSelector.addItem("Half",2);
-    rightSelector.addItem("Dotted Half",3);
+    rightSelector.addItem("Sixteenth",1);
+    rightSelector.addItem("Eighth",2);
+    rightSelector.addItem("Dotted Eighth",3);
     rightSelector.addItem("Quater",4);
-    rightSelector.addItem("Dotted Quarter",5);
-    rightSelector.addItem("Triplet",6);
-    rightSelector.setText("Select Delay...");
+    rightSelector.addItem("Dotted Quarter",6);
+    rightSelector.addItem("Fifth",5);
+    rightSelector.addItem("Seventh",7);
+    rightSelector.addItem("Ninth",9);
+    rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     
     gainKnobL.addListener(this);
     gainKnobL.setBounds(105, 150, 75, 75);
-    gainKnobL.setRange(-12.0, 0.0, 0.0);
+    gainKnobL.setRange(0.0f, 1.0, 0.1f);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobL.setLookAndFeel(&otherLookAndFeel);
@@ -64,7 +70,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     
     gainKnobR.addListener(this);
     gainKnobR.setBounds(615, 150, 75, 75);
-    gainKnobR.setRange(-12.0, 0.0, 0.0);
+    gainKnobR.setRange(0.0f, 1.0, 0.1f);
     gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobR.setLookAndFeel(&otherLookAndFeel);
@@ -148,6 +154,7 @@ void StereoDelayAudioProcessorEditor::comboBoxChanged(juce::ComboBox * comboBox)
         auto leftDelay = comboBox->getSelectedId();
         audioProcessor.delayLeft = leftDelay;
         //DBG(leftDelay);
+        
     }
     
     if (comboBox == &rightSelector)

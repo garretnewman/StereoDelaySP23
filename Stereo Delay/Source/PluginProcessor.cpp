@@ -150,19 +150,78 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         buffer.clear (i, 0, buffer.getNumSamples());
 
     
-    float wet = 0.6f;
-    delayL.setWet (wet);
-    //delayL.setDelayMS(delayValue);
+    //float wet = 0.6f;
+    delayL.setWet (gainValueL);
     gain.setGain(gainValueL);
-    delayR.setWet(wet);
+    delayR.setWet(gainValueR);
+    delayL.setDelayMS(delayValue);
+    delayR.setDelayMS(delayValue);
     
-    if (delayLeft == 1)
+    if(delayLeft == 1)
+    {
+        delayL.setDelayMS(delayValue);
+    }
+    else if (delayLeft == 2)
+    {
+        delayL.setDelayMS(delayValue * 2);
+    }
+    else if(delayLeft == 3)
+    {
+        delayL.setDelayMS(delayValue * 3);
+    }
+    else if(delayLeft == 4)
     {
         delayL.setDelayMS(delayValue * 4);
     }
-    else if(delayLeft == 2)
+    else if(delayLeft ==5)
     {
-        delayL.setDelayMS(delayValue * 2);
+        delayL.setDelayMS(delayValue * 5);
+    }
+    else if(delayLeft == 6)
+    {
+        delayL.setDelayMS(delayValue * 6);
+    }
+    else if(delayLeft == 7)
+    {
+        delayL.setDelayMS(delayValue * 7);
+    }
+    else if(delayLeft == 9)
+    {
+        delayL.setDelayMS(delayValue * 9);
+    }
+  
+    
+    if(delayRight == 1)
+    {
+        delayR.setDelayMS(delayValue);
+    }
+    else if (delayRight == 2)
+    {
+        delayR.setDelayMS(delayValue * 2);
+    }
+    else if(delayRight == 3)
+    {
+        delayR.setDelayMS(delayValue * 3);
+    }
+    else if(delayRight == 4)
+    {
+        delayR.setDelayMS(delayValue * 4);
+    }
+    else if(delayRight ==5)
+    {
+        delayR.setDelayMS(delayValue * 5);
+    }
+    else if(delayRight == 6)
+    {
+        delayR.setDelayMS(delayValue * 6);
+    }
+    else if(delayRight == 7)
+    {
+        delayR.setDelayMS(delayValue * 7);
+    }
+    else if(delayRight == 9)
+    {
+        delayR.setDelayMS(delayValue * 9);
     }
     int numSamples = buffer.getNumSamples();
     
@@ -180,7 +239,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         {
             delayL.processInPlace(channelData, numSamples, channel);
         }
-        // ..do something to the data...
+        
         if(channel == 1)
         {
             delayR.processInPlace(channelData, numSamples, channel);

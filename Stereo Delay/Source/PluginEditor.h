@@ -46,6 +46,7 @@ private:
     juce::LookAndFeel_V4 otherLookAndFeel;
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
+    bool isEditable = 1;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessorEditor)
 };
