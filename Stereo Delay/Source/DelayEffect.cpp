@@ -52,8 +52,8 @@ float EchoEffect::processSample(float x, const int c){
     
     float v = delay.processSample(x, c);
     
-    
-    float y = (1.f - wet) * x + wet * v;
+    smoothWet = 0.99f * smoothWet + 0.01f * wet;
+    float y = (1.f - smoothWet) * x + smoothWet * v;
     
     return y;
 }

@@ -14,10 +14,10 @@
 //==============================================================================
 /**
 */
-class StereoDelayAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                            public juce::ComboBox::Listener,
-                                            public juce::Button::Listener,
-                                            public juce::Slider::Listener
+class StereoDelayAudioProcessorEditor  : public juce::AudioProcessorEditor//,
+                                            //public juce::ComboBox::Listener,
+                                            //public juce::Button::Listener,
+                                            //public juce::Slider::Listener
                                             
 {
 public:
@@ -28,9 +28,9 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
-    void comboBoxChanged(juce::ComboBox * comboBox) override;
-    void buttonClicked(juce::Button * button) override;
-    void sliderValueChanged(juce::Slider * slider) override;
+//    void comboBoxChanged(juce::ComboBox * comboBox) override;
+//    void buttonClicked(juce::Button * button) override;
+//    void sliderValueChanged(juce::Slider * slider) override;
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -39,7 +39,7 @@ private:
     
     juce::ComboBox leftSelector;
     juce::ComboBox rightSelector;
-    juce::ToggleButton bypass;
+    // juce::ToggleButton bypass;
     juce::Slider delayKnob;
     
     juce::LookAndFeel_V2 lookAndFeel2;
@@ -47,6 +47,13 @@ private:
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
     bool isEditable = 1;
+    
+    
+public:
+    
+    std::vector<std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>> sliderAttachment;
+    std::vector<std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment>> boxAttachment;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoDelayAudioProcessorEditor)
 };

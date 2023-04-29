@@ -60,7 +60,10 @@ public:
     
     double gainValueL;
     double gainValueR;
+    
     double delayValue;
+    float smoothDelayValue = 0.f;
+    
     double delayLeft;
     double delayRight;
     
@@ -69,6 +72,12 @@ private:
     EchoEffect delayL;
     EchoEffect delayR;
     GainEffect gain;
+    
+    
+public:
+    
+    juce::AudioProcessorValueTreeState state;
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
     
     

@@ -21,19 +21,14 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     otherLookAndFeel.setColour(juce::Slider::thumbColourId, juce::Colours::darkred);
     juce::LookAndFeel::setDefaultLookAndFeel(&otherLookAndFeel);
     
-    delayKnob.addListener(this);
+    //delayKnob.addListener(this);
     delayKnob.setBounds(350, 90, 100, 80);
     delayKnob.setRange(50.0, 300, 1.0);
     delayKnob.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     addAndMakeVisible(delayKnob);
     
-    bypass.addListener(this);
-    bypass.setBounds(370, 20, 75, 75);
-    bypass.setButtonText("Bypass");
-    addAndMakeVisible(bypass);
-    
-    leftSelector.addListener(this);
+    //leftSelector.addListener(this);
     leftSelector.setBounds(35, 35, 75, 50);
     leftSelector.addItem("Sixteenth",1);
     leftSelector.addItem("Eighth",2);
@@ -47,7 +42,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftSelector.setText("Select Subdivision...");
     addAndMakeVisible(leftSelector);
     
-    rightSelector.addListener(this);
+    //rightSelector.addListener(this);
     rightSelector.setBounds(690, 35, 75, 50);
     rightSelector.addItem("Sixteenth",1);
     rightSelector.addItem("Eighth",2);
@@ -60,7 +55,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     
-    gainKnobL.addListener(this);
+    //gainKnobL.addListener(this);
     gainKnobL.setBounds(105, 150, 75, 75);
     gainKnobL.setRange(0.0f, 1.0, 0.1f);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -68,13 +63,19 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     gainKnobL.setLookAndFeel(&otherLookAndFeel);
     addAndMakeVisible(gainKnobL);
     
-    gainKnobR.addListener(this);
+    //gainKnobR.addListener(this);
     gainKnobR.setBounds(615, 150, 75, 75);
     gainKnobR.setRange(0.0f, 1.0, 0.1f);
     gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobR.setLookAndFeel(&otherLookAndFeel);
     addAndMakeVisible(gainKnobR);
+    
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"delayValue",delayKnob));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueL",gainKnobL));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueR",gainKnobR));
+    boxAttachment.emplace_back(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.state,"delayLeft",leftSelector));
+    boxAttachment.emplace_back(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.state,"delayRight",rightSelector));
     
 }
 
@@ -89,6 +90,8 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
  
+    g.setColour(juce::Colours::steelblue);
+    g.drawRect(0, 0, 800, 350);
     
     g.setColour (juce::Colours::darkgrey);
     g.fillRect(25, 25, 225, 300);
@@ -108,7 +111,7 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     
     g.setColour (juce::Colours::black);
     g.setFont (20.0f);
-    g.drawFittedText("Gain", 105, 175, 75, 75, juce::Justification::centredBottom, 1);
+    g.drawFittedText("Wet", 105, 175, 75, 75, juce::Justification::centredBottom, 1);
     
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
@@ -116,11 +119,11 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     
     g.setColour (juce::Colours::black);
     g.setFont (20.0f);
-    g.drawFittedText("Gain", 615, 175, 75, 75, juce::Justification::centredBottom, 1);
+    g.drawFittedText("Wet", 615, 175, 75, 75, juce::Justification::centredBottom, 1);
     
     g.setColour (juce::Colours::ghostwhite);
     g.setFont (28.f);
-    g.drawFittedText ("Polyrhythmic Stereo Delay", getLocalBounds(), juce::Justification::centredTop, 1);
+    g.drawFittedText ("My Little Poly Stereo Delay", getLocalBounds(), juce::Justification::centredTop, 1);
     
     g.setColour (juce::Colours::lightgrey);
     g.fillRoundedRectangle(300, 75, 200, 275, 10);
@@ -147,48 +150,48 @@ void StereoDelayAudioProcessorEditor::resized()
     // subcomponents in your editor..
 }
 
-void StereoDelayAudioProcessorEditor::comboBoxChanged(juce::ComboBox * comboBox)
-{
-    if(comboBox == &leftSelector)
-    {
-        auto leftDelay = comboBox->getSelectedId();
-        audioProcessor.delayLeft = leftDelay;
-        //DBG(leftDelay);
-        
-    }
-    
-    if (comboBox == &rightSelector)
-    {
-        auto rightDelay = comboBox ->getSelectedId();
-        audioProcessor.delayRight = rightDelay;
-    }
-}
-
-
-void StereoDelayAudioProcessorEditor::buttonClicked(juce::Button * button)
-{
-    // Implement functionality later
-}
-
-void StereoDelayAudioProcessorEditor::sliderValueChanged(juce::Slider * slider)
-{
-    // This is how we check which slider was moved
-        if (slider == &gainKnobL)
-        {
-            auto valueL = slider->getValue();
-            audioProcessor.gainValueL = valueL;
-            //DBG(valueL)
-        }
-        if (slider == &gainKnobR)
-        {
-            auto valueR = slider->getValue();
-            audioProcessor.gainValueR = valueR;
-            //DBG(valueR);
-        }
-    if(slider == &delayKnob)
-    {
-        auto valueD = slider->getValue();
-        audioProcessor.delayValue = valueD;
-    }
-}
+//void StereoDelayAudioProcessorEditor::comboBoxChanged(juce::ComboBox * comboBox)
+//{
+//    if(comboBox == &leftSelector)
+//    {
+//        auto leftDelay = comboBox->getSelectedId();
+//        audioProcessor.delayLeft = leftDelay;
+//        //DBG(leftDelay);
+//
+//    }
+//
+//    if (comboBox == &rightSelector)
+//    {
+//        auto rightDelay = comboBox ->getSelectedId();
+//        audioProcessor.delayRight = rightDelay;
+//    }
+//}
+//
+//
+//void StereoDelayAudioProcessorEditor::buttonClicked(juce::Button * button)
+//{
+//    // Implement functionality later
+//}
+//
+//void StereoDelayAudioProcessorEditor::sliderValueChanged(juce::Slider * slider)
+//{
+//    // This is how we check which slider was moved
+//        if (slider == &gainKnobL)
+//        {
+//            auto valueL = slider->getValue();
+//            audioProcessor.gainValueL = valueL;
+//            //DBG(valueL)
+//        }
+//        if (slider == &gainKnobR)
+//        {
+//            auto valueR = slider->getValue();
+//            audioProcessor.gainValueR = valueR;
+//            //DBG(valueR);
+//        }
+//    if(slider == &delayKnob)
+//    {
+//        auto valueD = slider->getValue();
+//        audioProcessor.delayValue = valueD;
+//    }
+//}
 

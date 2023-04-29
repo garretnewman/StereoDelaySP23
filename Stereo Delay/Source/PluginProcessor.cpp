@@ -22,13 +22,52 @@ StereoDelayAudioProcessor::StereoDelayAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), state(*this, nullptr,"DelayParams",createParameterLayout())
 #endif
 {
 }
 
 StereoDelayAudioProcessor::~StereoDelayAudioProcessor()
 {
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout StereoDelayAudioProcessor::createParameterLayout()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>  (juce::ParameterID("delayValue", 1),
+                                                                  "Tempo",
+                                                                  juce::NormalisableRange<float> (50.f, 300.f),
+                                                                  50.f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("gainValueL", 2),
+                                                                  "Wet Left",
+                                                                  juce::NormalisableRange<float> (0.0f, 1.0),
+                                                                  0.0f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("gainValueR", 3),
+                                                                  "Wet Right",
+                                                                  juce::NormalisableRange<float> (0.0f, 1.0),
+                                                                  0.0f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("delayLeft", 4),
+                                                                  "Left Subdivision",
+                                                                  juce::NormalisableRange<float> (1.f, 9.f),
+                                                                  1.f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("delayRight", 5),
+                                                                  "Right Subdivision",
+                                                                  juce::NormalisableRange<float> (1.f, 9.f),
+                                                                  1.f
+                                                                  )  );
+    
+
+    return {params.begin() , params.end()};
+    
 }
 
 //==============================================================================
@@ -151,11 +190,20 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
 
     
     //float wet = 0.6f;
-    delayL.setWet (gainValueL);
-    gain.setGain(gainValueL);
+//    delayL.setWet (gainValueL);
+//    gain.setGain(gainValueL);
+//    delayR.setWet(gainValueR);
+//    delayL.setDelayMS(delayValue);
+//    delayR.setDelayMS(delayValue);
+    
+    float delayValue = *state.getRawParameterValue("delayValue");
+    int delayRight = *state.getRawParameterValue("delayRight");
+    int delayLeft = *state.getRawParameterValue("delayLeft");
+    float gainValueL = *state.getRawParameterValue("gainValueL");
+    float gainValueR = *state.getRawParameterValue("gainValueR");
+    
+    delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
-    delayL.setDelayMS(delayValue);
-    delayR.setDelayMS(delayValue);
     
     if(delayLeft == 1)
     {
@@ -224,6 +272,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         delayR.setDelayMS(delayValue * 9);
     }
     int numSamples = buffer.getNumSamples();
+    
     
     
     // This is the place where you'd normally do the guts of your plugin's

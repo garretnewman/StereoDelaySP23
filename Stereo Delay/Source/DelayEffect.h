@@ -65,6 +65,7 @@ private:
     DelayEffect delay;
     
     float wet = 0.5f;
+    float smoothWet = 0.f;
     
     
     
