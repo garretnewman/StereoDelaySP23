@@ -138,7 +138,7 @@ void StereoDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     delayL.prepareToPlay(sampleRate, samplesPerBlock);
-    //delayR.prepareToPlay(sampleRate, samplesPerBlock);
+    delayR.prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void StereoDelayAudioProcessor::releaseResources()
@@ -200,12 +200,10 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     float c1 = 120/delayKnob;
     float c2 = 120 * c1;
     float c3 = 5 * c1;
-    float value = c2 +c3;
+    float value = c2 + c3;
     
     delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
-//    delayL.setDelayMS(delayKnob);
-//    delayR.setDelayMS(delayKnob);
 
     if(delayLeft == 1)
     {
@@ -317,12 +315,22 @@ void StereoDelayAudioProcessor::getStateInformation (juce::MemoryBlock& destData
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    
+    auto currentState = state.copyState();
+    std::unique_ptr<juce::XmlElement> xml (currentState.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void StereoDelayAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    
+    std::unique_ptr<juce::XmlElement> xml (getXmlFromBinary(data, sizeInBytes));
+    if (xml && xml->hasTagName(state.state.getType()))
+    {
+        state.replaceState(juce::ValueTree::fromXml(*xml));
+    }
 }
 
 //==============================================================================

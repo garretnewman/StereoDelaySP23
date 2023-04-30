@@ -31,7 +31,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftSelector.addItem("Sixteenth",1);
     leftSelector.addItem("Eighth",2);
     leftSelector.addItem("Dotted Eighth",3);
-    leftSelector.addItem("Quater",4);
+    leftSelector.addItem("Quarter",4);
     leftSelector.addItem("Dotted Quarter",6);
     leftSelector.addItem("Fifth",5);
     leftSelector.addItem("Seventh",7);
@@ -43,7 +43,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.addItem("Sixteenth",1);
     rightSelector.addItem("Eighth",2);
     rightSelector.addItem("Dotted Eighth",3);
-    rightSelector.addItem("Quater",4);
+    rightSelector.addItem("Quarter",4);
     rightSelector.addItem("Dotted Quarter",6);
     rightSelector.addItem("Fifth",5);
     rightSelector.addItem("Seventh",7);

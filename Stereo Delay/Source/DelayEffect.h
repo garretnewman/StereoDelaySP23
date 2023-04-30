@@ -37,7 +37,7 @@ private:
     int delaySamples = 10000;
     float Fs = 48000.f;
     float fbd = 0.f;
-    float fbdValue = 0.6f;
+    float fbdValue = 0.45f;
     float smoothDelay = 0.f;
 };
 
