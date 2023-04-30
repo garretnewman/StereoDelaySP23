@@ -189,89 +189,89 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         buffer.clear (i, 0, buffer.getNumSamples());
 
     
-    //float wet = 0.6f;
-//    delayL.setWet (gainValueL);
-//    gain.setGain(gainValueL);
-//    delayR.setWet(gainValueR);
-//    delayL.setDelayMS(delayValue);
-//    delayR.setDelayMS(delayValue);
+
     
-    float delayValue = *state.getRawParameterValue("delayValue");
+    float delayKnob = *state.getRawParameterValue("delayValue");
     int delayRight = *state.getRawParameterValue("delayRight");
     int delayLeft = *state.getRawParameterValue("delayLeft");
     float gainValueL = *state.getRawParameterValue("gainValueL");
     float gainValueR = *state.getRawParameterValue("gainValueR");
 
+    float c1 = 120/delayKnob;
+    float c2 = 120 * c1;
+    float c3 = 5 * c1;
+    float value = c2 +c3;
+    
     delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
-    delayL.setDelayMS(delayValue);
-    delayR.setDelayMS(delayValue);
-    
+//    delayL.setDelayMS(delayKnob);
+//    delayR.setDelayMS(delayKnob);
+
     if(delayLeft == 1)
     {
-        delayL.setDelayMS(delayValue);
+        delayL.setDelayMS(value);
     }
     else if (delayLeft == 2)
     {
-        delayL.setDelayMS(delayValue * 2);
+        delayL.setDelayMS(value * 2);
     }
     else if(delayLeft == 3)
     {
-        delayL.setDelayMS(delayValue * 3);
+        delayL.setDelayMS(value * 3);
     }
     else if(delayLeft == 4)
     {
-        delayL.setDelayMS(delayValue * 4);
+        delayL.setDelayMS(value * 4);
     }
     else if(delayLeft ==5)
     {
-        delayL.setDelayMS(delayValue * 5);
+        delayL.setDelayMS(value * 5);
     }
     else if(delayLeft == 6)
     {
-        delayL.setDelayMS(delayValue * 6);
+        delayL.setDelayMS(value * 6);
     }
     else if(delayLeft == 7)
     {
-        delayL.setDelayMS(delayValue * 7);
+        delayL.setDelayMS(value * 7);
     }
     else if(delayLeft == 9)
     {
-        delayL.setDelayMS(delayValue * 9);
+        delayL.setDelayMS(value * 9);
     }
   
     
     if(delayRight == 1)
     {
-        delayR.setDelayMS(delayValue);
+        delayR.setDelayMS(value);
     }
     else if (delayRight == 2)
     {
-        delayR.setDelayMS(delayValue * 2);
+        delayR.setDelayMS(value * 2);
     }
     else if(delayRight == 3)
     {
-        delayR.setDelayMS(delayValue * 3);
+        delayR.setDelayMS(value * 3);
     }
     else if(delayRight == 4)
     {
-        delayR.setDelayMS(delayValue * 4);
+        delayR.setDelayMS(value * 4);
     }
     else if(delayRight ==5)
     {
-        delayR.setDelayMS(delayValue * 5);
+        delayR.setDelayMS(value * 5);
     }
     else if(delayRight == 6)
     {
-        delayR.setDelayMS(delayValue * 6);
+        delayR.setDelayMS(value * 6);
     }
     else if(delayRight == 7)
     {
-        delayR.setDelayMS(delayValue * 7);
+        delayR.setDelayMS(value * 7);
     }
     else if(delayRight == 9)
     {
-        delayR.setDelayMS(delayValue * 9);
+        delayR.setDelayMS(value * 9);
     }
     int numSamples = buffer.getNumSamples();
     

@@ -34,9 +34,8 @@ float DelayEffect::processSample(float x, const int c){
 
 void DelayEffect::setDelayMS(float delayMS){
     
-//    float delaySec = delayMS / 1000.f;
-    smoothDelay = 0.994f * smoothDelay + 0.006f * delayMS;
-    float delaySec = 60 / smoothDelay;
+    float delaySec = delayMS / 1000.f;
+    //smoothDelay = 0.98f * smoothDelay + 0.02f * delayMS;
     delaySamples = delaySec * Fs;
     delaySamples = juce::jmin(delaySamples,95999);
     r[0] = w[0] - delaySamples;

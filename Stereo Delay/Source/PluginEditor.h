@@ -28,9 +28,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
-//    void comboBoxChanged(juce::ComboBox * comboBox) override;
-//    void buttonClicked(juce::Button * button) override;
-//    void sliderValueChanged(juce::Slider * slider) override;
+
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -39,14 +37,12 @@ private:
     
     juce::ComboBox leftSelector;
     juce::ComboBox rightSelector;
-    // juce::ToggleButton bypass;
     juce::Slider delayKnob;
     
     juce::LookAndFeel_V2 lookAndFeel2;
     juce::LookAndFeel_V4 otherLookAndFeel;
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
-    bool isEditable = 1;
     
     
 public:
