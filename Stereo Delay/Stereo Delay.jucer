@@ -4,8 +4,6 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="eRwH5d" name="Stereo Delay">
     <GROUP id="{4843DC79-65E9-4D70-692C-26FA8B907070}" name="Source">
-      <FILE id="Y7XXrG" name="GainEffect.cpp" compile="1" resource="0" file="Source/GainEffect.cpp"/>
-      <FILE id="pGveIT" name="GainEffect.h" compile="0" resource="0" file="Source/GainEffect.h"/>
       <FILE id="nopL4Z" name="DelayEffect.cpp" compile="1" resource="0" file="Source/DelayEffect.cpp"/>
       <FILE id="ciE1n5" name="DelayEffect.h" compile="0" resource="0" file="Source/DelayEffect.h"/>
       <FILE id="GywC6P" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -16,10 +14,7 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="FalDnL" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{6EDF48EB-FF99-3203-CD51-58C8669D5AA6}" name="Components">
-      <FILE id="dNFsec" name="Knob1.cpp" compile="1" resource="0" file="Source/Knob1.cpp"/>
-      <FILE id="J2Gs8I" name="Knob1.h" compile="0" resource="0" file="Source/Knob1.h"/>
-    </GROUP>
+    <GROUP id="{6EDF48EB-FF99-3203-CD51-58C8669D5AA6}" name="Components"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

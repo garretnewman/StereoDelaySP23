@@ -204,6 +204,8 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     
     delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
+//    delayL.setDelayMS(delayValue);
+//    delayR.setDelayMS(delayValue);
     
     if(delayLeft == 1)
     {

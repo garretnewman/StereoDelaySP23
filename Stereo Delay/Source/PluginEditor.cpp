@@ -38,7 +38,6 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftSelector.addItem("Fifth",5);
     leftSelector.addItem("Seventh",7);
     leftSelector.addItem("Ninth",9);
-    leftSelector.setEditableText(isEditable);
     leftSelector.setText("Select Subdivision...");
     addAndMakeVisible(leftSelector);
     

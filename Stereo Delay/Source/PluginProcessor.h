@@ -10,7 +10,6 @@
 
 #include <JuceHeader.h>
 #include "DelayEffect.h"
-#include "GainEffect.h"
 
 //==============================================================================
 /**
@@ -71,7 +70,6 @@ private:
     
     EchoEffect delayL;
     EchoEffect delayR;
-    GainEffect gain;
     
     
 public:
