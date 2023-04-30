@@ -201,11 +201,11 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     int delayLeft = *state.getRawParameterValue("delayLeft");
     float gainValueL = *state.getRawParameterValue("gainValueL");
     float gainValueR = *state.getRawParameterValue("gainValueR");
-    
+
     delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
-//    delayL.setDelayMS(delayValue);
-//    delayR.setDelayMS(delayValue);
+    delayL.setDelayMS(delayValue);
+    delayR.setDelayMS(delayValue);
     
     if(delayLeft == 1)
     {
