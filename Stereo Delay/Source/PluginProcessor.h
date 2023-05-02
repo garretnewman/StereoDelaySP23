@@ -71,6 +71,8 @@ private:
     EchoEffect delayL;
     EchoEffect delayR;
     
+    juce::AudioPlayHead *playHead;
+    juce::AudioPlayHead:: CurrentPositionInfo cpi;
     
 public:
     

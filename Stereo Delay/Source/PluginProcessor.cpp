@@ -187,7 +187,14 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
+    
+    // Auto Read BPM
+    playHead = this->getPlayHead();
+    if(playHead != nullptr)
+    {
+        playHead->getCurrentPosition(cpi);
+    }
+    auto BPM = cpi.bpm;
     
 
     

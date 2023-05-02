@@ -13,8 +13,8 @@
 float DelayEffect::processSample(float x, const int c){
    
      fbd = delayBuffer[r[c]][c];
-    float y = (x + fbd) * (fbdValue);
-    delayBuffer[w[c]][c] = y;
+    float y = (fbd) * (fbdValue);
+    delayBuffer[w[c]][c] = y + x;
     
     // Increment Index
     w[c]++;
