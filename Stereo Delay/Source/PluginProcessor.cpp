@@ -194,7 +194,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     {
         playHead->getCurrentPosition(cpi);
     }
-    auto BPM = cpi.bpm;
+    int BPM = cpi.bpm;
     
 
     
@@ -204,7 +204,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     float gainValueL = *state.getRawParameterValue("gainValueL");
     float gainValueR = *state.getRawParameterValue("gainValueR");
 
-    float c1 = 120/delayKnob;
+    float c1 = 120/BPM;
     float c2 = 120 * c1;
     float c3 = 5 * c1;
     float value = c2 + c3;

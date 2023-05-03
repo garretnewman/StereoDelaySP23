@@ -51,19 +51,39 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     
-    gainKnobL.setBounds(105, 150, 75, 75);
+    gainKnobL.setBounds(105, 100, 95, 95);
     gainKnobL.setRange(0.0f, 1.0, 0.1f);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
-    gainKnobL.setLookAndFeel(&otherLookAndFeel);
+//    gainKnobL.setLookAndFeel(&otherLookAndFeel);
+    gainKnobL.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.brighter(0.1));
+    gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red.darker(.4));
+    gainKnobL.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::silver.darker(0.8));
     addAndMakeVisible(gainKnobL);
     
-    gainKnobR.setBounds(615, 150, 75, 75);
+    gainKnobR.setBounds(615, 100, 95, 95);
     gainKnobR.setRange(0.0f, 1.0, 0.1f);
     gainKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     gainKnobR.setLookAndFeel(&otherLookAndFeel);
+    gainKnobR.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.brighter(0.1));
+    gainKnobR.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::orange);
+    gainKnobR.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    gainKnobR.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::silver.darker(0.8));
     addAndMakeVisible(gainKnobR);
+    
+    leftLevel.attachToComponent(&gainKnobL, false);
+    leftLevel.setText("Level",juce::dontSendNotification);
+    leftLevel.setJustificationType(juce::Justification::centredTop);
+    leftLevel.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
+    addAndMakeVisible(leftLevel);
+    
+    rightLevel.attachToComponent(&gainKnobR, false);
+    rightLevel.setText("Level", juce::dontSendNotification);
+    rightLevel.setJustificationType(juce::Justification::centredTop);
+    rightLevel.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
+    addAndMakeVisible(rightLevel);
     
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"delayValue",delayKnob));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueL",gainKnobL));
@@ -83,21 +103,18 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
- 
+    
+    
+    g.fillAll(juce::Colours::steelblue.brighter(0.1));
+    
     g.setColour(juce::Colours::steelblue);
     g.drawRect(0, 0, 800, 350);
     
-    g.setColour (juce::Colours::darkgrey);
-    g.fillRect(25, 25, 225, 300);
+    g.setColour (juce::Colours::floralwhite);
+    g.drawRoundedRectangle(30, 30, 230, 305, 10, 5);
     
     g.setColour (juce::Colours::floralwhite);
-    g.fillRect(30, 30, 230, 305);
-    
-    g.setColour(juce::Colours::darkgrey);
-    g.fillRect(550, 25, 225, 300);
-    
-    g.setColour (juce::Colours::floralwhite);
-    g.fillRect(540, 30, 230, 305);
+    g.drawRoundedRectangle(540, 30, 230, 305, 10, 5);
     
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
@@ -128,12 +145,6 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
     g.drawFittedText("Tempo", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
-    
-    g.setColour (juce::Colours::darkgrey);
-    g.fillRoundedRectangle(105, 150, 75, 75, 5);
-
-    g.setColour (juce::Colours::darkgrey);
-    g.fillRoundedRectangle(615, 150, 75, 75, 5);
     
     
 }

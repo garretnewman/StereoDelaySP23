@@ -44,6 +44,9 @@ private:
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
     
+    juce::Label leftLevel;
+    juce::Label rightLevel;
+    
     
 public:
     
