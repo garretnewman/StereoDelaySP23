@@ -14,7 +14,12 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="FalDnL" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{6EDF48EB-FF99-3203-CD51-58C8669D5AA6}" name="Components"/>
+    <GROUP id="{6EDF48EB-FF99-3203-CD51-58C8669D5AA6}" name="Components">
+      <FILE id="l17Hi1" name="ComboBoxL&amp;F.cpp" compile="1" resource="0"
+            file="Source/ComboBoxL&amp;F.cpp"/>
+      <FILE id="wf7MFx" name="ComboBoxL&amp;F.h" compile="0" resource="0"
+            file="Source/ComboBoxL&amp;F.h"/>
+    </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

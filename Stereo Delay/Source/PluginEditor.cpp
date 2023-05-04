@@ -27,7 +27,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     delayKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
     addAndMakeVisible(delayKnob);
     
-    leftSelector.setBounds(35, 35, 75, 50);
+    leftSelector.setBounds(35, 270, 110, 25); // pos x, pos y, width, height
     leftSelector.addItem("Sixteenth",1);
     leftSelector.addItem("Eighth",2);
     leftSelector.addItem("Dotted Eighth",3);
@@ -51,13 +51,13 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     
-    gainKnobL.setBounds(105, 100, 95, 95);
+    gainKnobL.setBounds(30, 60, 95, 95);
     gainKnobL.setRange(0.0f, 1.0, 0.1f);
     gainKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
 //    gainKnobL.setLookAndFeel(&otherLookAndFeel);
     gainKnobL.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.brighter(0.1));
-    gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red.darker(.4));
+    gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red.darker(.1));
     gainKnobL.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
     gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::silver.darker(0.8));
     addAndMakeVisible(gainKnobL);
@@ -85,6 +85,12 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightLevel.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
     addAndMakeVisible(rightLevel);
     
+    title.setText("My Little Poly Stereo Delay", juce::dontSendNotification);
+    title.setJustificationType(juce::Justification::centred);
+    title.setBounds(275, 10, 250, 20);
+    title.setFont(juce::Font("Arial Black", 32.0, juce::Font::bold));
+    addAndMakeVisible(title);
+    
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"delayValue",delayKnob));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueL",gainKnobL));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueR",gainKnobR));
@@ -111,7 +117,9 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawRect(0, 0, 800, 350);
     
     g.setColour (juce::Colours::floralwhite);
-    g.drawRoundedRectangle(30, 30, 230, 305, 10, 5);
+    g.drawRoundedRectangle(30, 30, 230, 305, 10, 5); // pos x, pos y, width, height, corner size, thickness
+    
+    g.drawRoundedRectangle(30, 30, 95, 135, 10, 4);
     
     g.setColour (juce::Colours::floralwhite);
     g.drawRoundedRectangle(540, 30, 230, 305, 10, 5);
@@ -120,21 +128,13 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (20.0f);
     g.drawFittedText("Left Channel", 35, 35, 225, 300, juce::Justification::centredBottom, 1);
     
-    g.setColour (juce::Colours::black);
-    g.setFont (20.0f);
-    g.drawFittedText("Wet", 105, 175, 75, 75, juce::Justification::centredBottom, 1);
-    
     g.setColour (juce::Colours::darkgrey);
     g.setFont (20.0f);
     g.drawFittedText("Right Channel", 550, 35, 225, 300, juce::Justification::centredBottom, 1);
     
-    g.setColour (juce::Colours::black);
-    g.setFont (20.0f);
-    g.drawFittedText("Wet", 615, 175, 75, 75, juce::Justification::centredBottom, 1);
-    
-    g.setColour (juce::Colours::ghostwhite);
-    g.setFont (28.f);
-    g.drawFittedText ("My Little Poly Stereo Delay", getLocalBounds(), juce::Justification::centredTop, 1);
+//    g.setColour (juce::Colours::ghostwhite);
+//    g.setFont (28.f);
+//    g.drawFittedText ("My Little Poly Stereo Delay", getLocalBounds(), juce::Justification::centredTop, 1);
     
     g.setColour (juce::Colours::lightgrey);
     g.fillRoundedRectangle(300, 75, 200, 275, 10);
@@ -154,6 +154,4 @@ void StereoDelayAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }
-
-
 
