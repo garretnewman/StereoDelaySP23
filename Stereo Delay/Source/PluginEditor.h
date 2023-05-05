@@ -43,12 +43,23 @@ private:
     juce::LookAndFeel_V4 otherLookAndFeel;
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
+    juce::Slider feedbackL;
+    juce::Slider feedbackR;
+    juce::Slider valueL;
+    juce::Slider valueR;
     
+    juce::Label delayLabel;
     juce::Label leftLevel;
     juce::Label rightLevel;
+    juce::Label feedbackLabelLeft;
+    juce::Label feedbackLabelRight;
     juce::Label title;
-    
-    
+    juce::Label leftChannel;
+    juce::Label rightChannel;
+    juce::Label customLeft;
+    juce::Label customRight;
+    juce::Label presetLeft;
+    juce::Label presetRight;
 public:
     
     std::vector<std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>> sliderAttachment;
