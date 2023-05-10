@@ -26,6 +26,8 @@ public:
         r[1] = w[1] - delaySamples;
     }
     
+    void setFeedback(float newFBD) {fbdValue = newFBD;}
+    
 private:
     
     // One sample of delay
@@ -60,6 +62,11 @@ public:
     
     void setDelayMS(float delayMS){
         delay.setDelayMS(delayMS);
+    }
+    
+    void setFeedback(float newFBD)
+    {
+        delay.setFeedback(newFBD);
     }
     
 private:

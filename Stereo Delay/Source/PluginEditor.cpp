@@ -51,15 +51,15 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     gainKnobL.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
     addAndMakeVisible(gainKnobL);
     
-    feedbackL.setBounds(160, 110, 95, 95);
-    feedbackL.setRange(0.0f, 1.0f, 0.01f);
-    feedbackL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    feedbackL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
-    feedbackL.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::floralwhite);
-    feedbackL.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red.brighter(.85));
-    feedbackL.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
-    feedbackL.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
-    addAndMakeVisible(feedbackL);
+    feedbackKnobL.setBounds(160, 110, 95, 95);
+    feedbackKnobL.setRange(0.0f, 1.0f, 0.1f);
+    feedbackKnobL.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    feedbackKnobL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
+    feedbackKnobL.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::floralwhite);
+    feedbackKnobL.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red.brighter(.85));
+    feedbackKnobL.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    feedbackKnobL.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
+    addAndMakeVisible(feedbackKnobL);
     
     leftSelector.setBounds(40, 200, 110, 25); // pos x, pos y, width, height
     leftSelector.addItem("Sixteenth",1);
@@ -73,7 +73,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftSelector.setText("Select Subdivision...");
     addAndMakeVisible(leftSelector);
     
-    valueL.setBounds(40, 275, 180, 50);
+    valueL.setBounds(40, 275, 210, 50);
     valueL.setRange(0.0f, 15.0f, 0.01f);
     valueL.setSliderStyle(juce::Slider::LinearHorizontal);
     valueL.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
@@ -89,7 +89,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftLevel.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
     addAndMakeVisible(leftLevel);
     
-    feedbackLabelLeft.attachToComponent(&feedbackL, false);
+    feedbackLabelLeft.attachToComponent(&feedbackKnobL, false);
     feedbackLabelLeft.setText("Feedback",juce::dontSendNotification);
     feedbackLabelLeft.setJustificationType(juce::Justification::centredTop);
     feedbackLabelLeft.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
@@ -110,7 +110,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftChannel.setText("Left Channel", juce::dontSendNotification);
     leftChannel.setJustificationType(juce::Justification::left);
     leftChannel.setBounds(130, 40, 250, 20);
-    leftChannel.setFont(juce::Font("Arial Black", 24.0, juce::Font::bold));
+    leftChannel.setFont(juce::Font("Arial Black", 23.0, juce::Font::bold));
     addAndMakeVisible(leftChannel);
     
     //==============================================================================
@@ -123,18 +123,18 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     gainKnobR.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::floralwhite);
     gainKnobR.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::orange.brighter(.8));
     gainKnobR.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
-    gainKnobR.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::silver.darker(0.8));
+    gainKnobR.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
     addAndMakeVisible(gainKnobR);
     
-    feedbackR.setBounds(670, 110, 95, 95);
-    feedbackR.setRange(0.0f, 1.0f, 0.01f);
-    feedbackR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    feedbackR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
-    feedbackR.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::floralwhite);
-    feedbackR.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::orange.brighter(.8));
-    feedbackR.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
-    feedbackR.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
-    addAndMakeVisible(feedbackR);
+    feedbackKnobR.setBounds(670, 110, 95, 95);
+    feedbackKnobR.setRange(0.0f, 1.0f, 0.01f);
+    feedbackKnobR.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    feedbackKnobR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 75, 25);
+    feedbackKnobR.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::floralwhite);
+    feedbackKnobR.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::orange.brighter(.8));
+    feedbackKnobR.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    feedbackKnobR.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::floralwhite);
+    addAndMakeVisible(feedbackKnobR);
     
     rightSelector.setBounds(550, 200, 110, 25);
     rightSelector.addItem("Sixteenth",1);
@@ -148,7 +148,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     
-    valueR.setBounds(550, 275, 180, 50);
+    valueR.setBounds(550, 275, 210, 50);
     valueR.setRange(0.0f, 15.0f, 0.01f);
     valueR.setSliderStyle(juce::Slider::LinearHorizontal);
     valueR.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
@@ -164,7 +164,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightLevel.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
     addAndMakeVisible(rightLevel);
     
-    feedbackLabelRight.attachToComponent(&feedbackR, false);
+    feedbackLabelRight.attachToComponent(&feedbackKnobR, false);
     feedbackLabelRight.setText("Feedback",juce::dontSendNotification);
     feedbackLabelRight.setJustificationType(juce::Justification::centredTop);
     feedbackLabelRight.setFont(juce::Font("Arial Black", 20.0, juce::Font::bold));
@@ -181,6 +181,12 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     customRight.setJustificationType(juce::Justification::topLeft);
     customRight.setFont(juce::Font("Arial Black", 20.0,juce::Font::bold));
     addAndMakeVisible(customRight);
+    
+    rightChannel.setText("Right Channel", juce::dontSendNotification);
+    rightChannel.setJustificationType(juce::Justification::left);
+    rightChannel.setBounds(635, 40, 250, 20);
+    rightChannel.setFont(juce::Font("Arial Black", 23.0, juce::Font::bold));
+    addAndMakeVisible(rightChannel);
 
     
     title.setText("My Little Poly Stereo Delay", juce::dontSendNotification);
@@ -196,7 +202,10 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"gainValueR",gainKnobR));
     boxAttachment.emplace_back(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.state,"delayLeft",leftSelector));
     boxAttachment.emplace_back(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.state,"delayRight",rightSelector));
-    
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"feedbackValueL",feedbackKnobL));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"customValueL",valueL));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"feedbackValue",feedbackKnobR));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"customValueR",valueR));
 }
 
 StereoDelayAudioProcessorEditor::~StereoDelayAudioProcessorEditor()
@@ -239,13 +248,6 @@ void StereoDelayAudioProcessorEditor::paint (juce::Graphics& g)
     
     g.setColour (juce::Colours::floralwhite);
     g.drawRoundedRectangle(300, 75, 200, 230, 10, 5);
-    
-//    g.setColour (juce::Colours::grey);
-//    g.fillRoundedRectangle(350, 85, 100, 100, 10);
-    
-//    g.setColour (juce::Colours::darkgrey);
-//    g.setFont (20.0f);
-//    g.drawFittedText("Tempo", 350, 125, 100, 80, juce::Justification::centredBottom, 1);
     
     
 }

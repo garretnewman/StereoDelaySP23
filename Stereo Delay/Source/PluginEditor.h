@@ -43,8 +43,8 @@ private:
     juce::LookAndFeel_V4 otherLookAndFeel;
     juce::Slider gainKnobL;
     juce::Slider gainKnobR;
-    juce::Slider feedbackL;
-    juce::Slider feedbackR;
+    juce::Slider feedbackKnobL;
+    juce::Slider feedbackKnobR;
     juce::Slider valueL;
     juce::Slider valueR;
     

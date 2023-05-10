@@ -43,7 +43,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout StereoDelayAudioProcessor::c
     
     params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("gainValueL", 2),
                                                                   "Wet Left",
-                                                                  juce::NormalisableRange<float> (0.0f, 1.0),
+                                                                  juce::NormalisableRange<float> (0.0f, 1.0f),
                                                                   0.0f
                                                                   )  );
     
@@ -65,6 +65,29 @@ juce::AudioProcessorValueTreeState::ParameterLayout StereoDelayAudioProcessor::c
                                                                   1.f
                                                                   )  );
     
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("feedbackValueL", 6),
+                                                                  "Feedback Left",
+                                                                  juce::NormalisableRange<float> (0.0f, 1.0f),
+                                                                  0.45f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("customValueL", 7),
+                                                                  "Custom Value Left",
+                                                                  juce::NormalisableRange<float> (0.0f, 15.f),
+                                                                  0.0f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("feedbackValueR", 8),
+                                                                  "Feedback Right",
+                                                                  juce::NormalisableRange<float> (0.0f, 1.0f),
+                                                                  0.45f
+                                                                  )  );
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("customValueR", 9),
+                                                                  "Custom Value Right",
+                                                                  juce::NormalisableRange<float> (0.0f, 15.f),
+                                                                  0.0f
+                                                                  )  );
 
     return {params.begin() , params.end()};
     
@@ -203,7 +226,11 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     int delayLeft = *state.getRawParameterValue("delayLeft");
     float gainValueL = *state.getRawParameterValue("gainValueL");
     float gainValueR = *state.getRawParameterValue("gainValueR");
-
+    float feedbackValueL = *state.getRawParameterValue("feedbackValueL");
+    float customValueL = *state.getRawParameterValue("customValueL");
+    float feedbackValueR = *state.getRawParameterValue("feedbackValueR");
+    float customValueR =  *state.getRawParameterValue("customValueR");
+    
     float c1 = 120/delayKnob;
     float c2 = 120 * c1;
     float c3 = 5 * c1;
@@ -211,73 +238,93 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     
     delayL.setWet(gainValueL);
     delayR.setWet(gainValueR);
-
-    if(delayLeft == 1)
+    
+    delayL.setFeedback(feedbackValueL);
+    delayR.setFeedback(feedbackValueR);
+    
+    if (customValueL == 0)
     {
-        delayL.setDelayMS(value);
+        if(delayLeft == 1)
+        {
+            delayL.setDelayMS(value);
+        }
+        else if (delayLeft == 2)
+        {
+            delayL.setDelayMS(value * 2);
+        }
+        else if(delayLeft == 3)
+        {
+            delayL.setDelayMS(value * 3);
+        }
+        else if(delayLeft == 4)
+        {
+            delayL.setDelayMS(value * 4);
+        }
+        else if(delayLeft ==5)
+        {
+            delayL.setDelayMS(value * 5);
+        }
+        else if(delayLeft == 6)
+        {
+            delayL.setDelayMS(value * 6);
+        }
+        else if(delayLeft == 7)
+        {
+            delayL.setDelayMS(value * 7);
+        }
+        else if(delayLeft == 9)
+        {
+            delayL.setDelayMS(value * 9);
+        }
+      
     }
-    else if (delayLeft == 2)
+    
+    if (customValueL != 0)
     {
-        delayL.setDelayMS(value * 2);
+        delayL.setDelayMS(value *  customValueL);
     }
-    else if(delayLeft == 3)
+    
+    if (customValueR == 0)
     {
-        delayL.setDelayMS(value * 3);
+        if(delayRight == 1)
+        {
+            delayR.setDelayMS(value);
+        }
+        else if (delayRight == 2)
+        {
+            delayR.setDelayMS(value * 2);
+        }
+        else if(delayRight == 3)
+        {
+            delayR.setDelayMS(value * 3);
+        }
+        else if(delayRight == 4)
+        {
+            delayR.setDelayMS(value * 4);
+        }
+        else if(delayRight ==5)
+        {
+            delayR.setDelayMS(value * 5);
+        }
+        else if(delayRight == 6)
+        {
+            delayR.setDelayMS(value * 6);
+        }
+        else if(delayRight == 7)
+        {
+            delayR.setDelayMS(value * 7);
+        }
+        else if(delayRight == 9)
+        {
+            delayR.setDelayMS(value * 9);
+        }
     }
-    else if(delayLeft == 4)
+    
+    if (customValueR != 0)
     {
-        delayL.setDelayMS(value * 4);
-    }
-    else if(delayLeft ==5)
-    {
-        delayL.setDelayMS(value * 5);
-    }
-    else if(delayLeft == 6)
-    {
-        delayL.setDelayMS(value * 6);
-    }
-    else if(delayLeft == 7)
-    {
-        delayL.setDelayMS(value * 7);
-    }
-    else if(delayLeft == 9)
-    {
-        delayL.setDelayMS(value * 9);
+        delayR.setDelayMS(value * customValueR);
     }
   
-    
-    if(delayRight == 1)
-    {
-        delayR.setDelayMS(value);
-    }
-    else if (delayRight == 2)
-    {
-        delayR.setDelayMS(value * 2);
-    }
-    else if(delayRight == 3)
-    {
-        delayR.setDelayMS(value * 3);
-    }
-    else if(delayRight == 4)
-    {
-        delayR.setDelayMS(value * 4);
-    }
-    else if(delayRight ==5)
-    {
-        delayR.setDelayMS(value * 5);
-    }
-    else if(delayRight == 6)
-    {
-        delayR.setDelayMS(value * 6);
-    }
-    else if(delayRight == 7)
-    {
-        delayR.setDelayMS(value * 7);
-    }
-    else if(delayRight == 9)
-    {
-        delayR.setDelayMS(value * 9);
-    }
     int numSamples = buffer.getNumSamples();
     
     
@@ -346,4 +393,5 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new StereoDelayAudioProcessor();
 }
+
 

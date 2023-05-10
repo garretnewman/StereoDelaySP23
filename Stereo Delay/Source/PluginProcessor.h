@@ -63,9 +63,11 @@ public:
     double delayValue;
     float smoothDelayValue = 0.f;
     
-    double delayLeft;
-    double delayRight;
+    float delayLeft;
+    float delayRight;
     
+    float feedbackValueL;
+    float feedbackValueR;
 private:
     
     EchoEffect delayL;
