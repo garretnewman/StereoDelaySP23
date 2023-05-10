@@ -31,6 +31,7 @@ StereoDelayAudioProcessor::~StereoDelayAudioProcessor()
 {
 }
 
+
 juce::AudioProcessorValueTreeState::ParameterLayout StereoDelayAudioProcessor::createParameterLayout()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
@@ -38,19 +39,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout StereoDelayAudioProcessor::c
     params.push_back(std::make_unique<juce::AudioParameterFloat>  (juce::ParameterID("delayValue", 1),
                                                                   "Tempo",
                                                                   juce::NormalisableRange<float> (50.f, 300.f),
-                                                                  50.f
+                                                                  120.f
                                                                   )  );
     
     params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("gainValueL", 2),
                                                                   "Wet Left",
                                                                   juce::NormalisableRange<float> (0.0f, 1.0f),
-                                                                  0.0f
+                                                                  0.4f
                                                                   )  );
     
     params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("gainValueR", 3),
                                                                   "Wet Right",
                                                                   juce::NormalisableRange<float> (0.0f, 1.0),
-                                                                  0.0f
+                                                                  0.4f
                                                                   )  );
     
     params.push_back(std::make_unique<juce::AudioParameterFloat> (juce::ParameterID("delayLeft", 4),
@@ -196,6 +197,7 @@ bool StereoDelayAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
 }
 #endif
 
+
 void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
@@ -208,16 +210,21 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
+    
+
+    
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+
     // Auto Read BPM
-    playHead = this->getPlayHead();
-    if(playHead != nullptr)
-    {
-        playHead->getCurrentPosition(cpi);
-    }
-    int BPM = cpi.bpm;
+//    playHead = this->getPlayHead();
+//    if(playHead != nullptr)
+//    {
+//        playHead->getCurrentPosition(cpi);
+//    }
+//    int BPM = cpi.bpm;
+    
     
 
     

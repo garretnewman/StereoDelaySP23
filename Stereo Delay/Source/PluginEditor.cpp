@@ -204,7 +204,7 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     boxAttachment.emplace_back(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.state,"delayRight",rightSelector));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"feedbackValueL",feedbackKnobL));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"customValueL",valueL));
-    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"feedbackValue",feedbackKnobR));
+    sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"feedbackValueR",feedbackKnobR));
     sliderAttachment.emplace_back(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state,"customValueR",valueR));
 }
 
