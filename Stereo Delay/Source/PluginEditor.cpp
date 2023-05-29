@@ -66,10 +66,11 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     leftSelector.addItem("Eighth",2);
     leftSelector.addItem("Dotted Eighth",3);
     leftSelector.addItem("Quarter",4);
-    leftSelector.addItem("Fifth",6);
     leftSelector.addItem("Dotted Quarter",5);
-    leftSelector.addItem("Seventh",7);
-    leftSelector.addItem("Ninth",9);
+    leftSelector.addItem("Triplet",10);
+    leftSelector.addItem("4/3",6);
+    leftSelector.addItem("7/4",7);
+    leftSelector.addItem("9/4",9);
     leftSelector.setText("Select Subdivision...");
     addAndMakeVisible(leftSelector);
     
@@ -141,10 +142,11 @@ StereoDelayAudioProcessorEditor::StereoDelayAudioProcessorEditor (StereoDelayAud
     rightSelector.addItem("Eighth",2);
     rightSelector.addItem("Dotted Eighth",3);
     rightSelector.addItem("Quarter",4);
-    rightSelector.addItem("Fifth",6);
     rightSelector.addItem("Dotted Quarter",5);
-    rightSelector.addItem("Seventh",7);
-    rightSelector.addItem("Ninth",9);
+    rightSelector.addItem("Triplet",10);
+    rightSelector.addItem("4/3",6);
+    rightSelector.addItem("7/4",7);
+    rightSelector.addItem("9/4",8);
     rightSelector.setText("Select Subdivision...");
     addAndMakeVisible(rightSelector);
     

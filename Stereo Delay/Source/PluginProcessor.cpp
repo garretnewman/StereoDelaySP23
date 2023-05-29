@@ -283,6 +283,7 @@ void StereoDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         {
             delayL.setDelayMS(value * 9);
         }
+        // else if(delayL.setDelayMS)
       
     }
     
